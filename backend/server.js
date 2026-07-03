@@ -7,6 +7,8 @@ const port = 5000
 app.use(cors())
 app.use(express.json())
 
+app.use("/api/properties", require("./routes/properties"))
+
 app.get("/api/health", async (req, res) => {
     try {
         await pool.query('SELECT 1')
