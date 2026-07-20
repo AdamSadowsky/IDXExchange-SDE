@@ -38,3 +38,13 @@
     justify-content: space-between;
     font-size: 18px;
 }
+
+.filterHolder {
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    padding: 8px;
+    font-size: 16px;
+}
