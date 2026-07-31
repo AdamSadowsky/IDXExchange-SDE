@@ -1,4 +1,4 @@
-.header, .total {
+.header, .total, .page {
     text-align: center;
 }
 
@@ -48,3 +48,32 @@ input {
     padding: 8px;
     font-size: 16px;
 }
+
+.page {
+  display: flex;
+}
+
+.paginationHolder {
+  display: flex;
+  flex-direction: column;
+  margin: 50px auto;
+  align-items: center;
+}
+
+.buttonHolder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pageBttn, .prev, .next {
+  font-size: 18px;
+  padding: 16px;
+  background-color: burlywood;
+  margin: 1px;
+}
+
+.pageBttn:hover, .prev:hover, .next:hover {
+  background-color: antiquewhite;
+}
+

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function PropertyFilters({ onSearch }) {
+function PropertyFilters({ onSearch, setCurrentPage, setOffset }) {
     const emptyFilters = {
         city: "",
         zipcode: "",
@@ -43,7 +43,9 @@ function PropertyFilters({ onSearch }) {
                 onChange={(e) => setFilters({...filters, maxPrice: e.target.value})}
             />
             
-            <select value={filters.beds} onChange={(e) => setFilters({...filters, beds: e.target.value})}>
+            <select value={filters.beds} onChange={(e) => { 
+                setFilters({...filters, beds: e.target.value})
+            }}>
                 <option value="">Beds</option>
                 <option>1</option>
                 <option>2</option>
@@ -55,7 +57,9 @@ function PropertyFilters({ onSearch }) {
                 <option>8</option>
             </select>
 
-            <select value={filters.baths} onChange={(e) => setFilters({...filters, baths: e.target.value})}>
+            <select value={filters.baths} onChange={(e) => { 
+                setFilters({...filters, baths: e.target.value})
+            }}>
                 <option value="">Baths</option>
                 <option>1</option>
                 <option>2</option>
@@ -67,10 +71,17 @@ function PropertyFilters({ onSearch }) {
                 <option>8</option>
             </select>
             
-            <button className="search" onClick={() => {onSearch(filters)}}>Search</button>
+            <button className="search" onClick={() => { 
+                onSearch(filters) 
+                setCurrentPage(1)
+                setOffset(0)
+            }}>Search</button>
+
             <button className="clear" onClick={() => {
                 onSearch(emptyFilters)
-                setFilters(emptyFilters)}}>Clear</button>
+                setFilters(emptyFilters)
+                setCurrentPage(1)
+                setOffset(0)}}>Clear</button>
         </div>
     )
 }

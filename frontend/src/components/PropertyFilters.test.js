@@ -3,8 +3,10 @@ import PropertyFilters from "./PropertyFilters"
 
 test("search sends city", () => {
     const mockOnSearch = jest.fn()
+    const mockSetCurrentPage = jest.fn()
+    const mockSetOffset = jest.fn()
 
-    render(<PropertyFilters onSearch={mockOnSearch} />)
+    render(<PropertyFilters onSearch={mockOnSearch} setCurrentPage={mockSetCurrentPage} setOffset={mockSetOffset} />)
 
     fireEvent.change(
         screen.getByPlaceholderText("City"),
@@ -24,8 +26,10 @@ test("search sends city", () => {
 
 test("search sends city and beds", () => {
     const mockOnSearch = jest.fn()
+    const mockSetCurrentPage = jest.fn()
+    const mockSetOffset = jest.fn()
 
-    render(<PropertyFilters onSearch={mockOnSearch} />)
+    render(<PropertyFilters onSearch={mockOnSearch} setCurrentPage={mockSetCurrentPage} setOffset={mockSetOffset} />)
 
     fireEvent.change(
         screen.getByPlaceholderText("City"),
@@ -51,8 +55,10 @@ test("search sends city and beds", () => {
 
 test("empty", () => {
     const mockOnSearch = jest.fn()
+    const mockSetCurrentPage = jest.fn()
+    const mockSetOffset = jest.fn()
 
-    render(<PropertyFilters onSearch={mockOnSearch} />)
+    render(<PropertyFilters onSearch={mockOnSearch} setCurrentPage={mockSetCurrentPage} setOffset={mockSetOffset} />)
 
     fireEvent.click(
         screen.getByRole("button", { name: "Search" })
