@@ -1,25 +1,29 @@
+import { useNavigate } from "react-router-dom"
+import PropertyDetailPage from "../pages/PropertyDetailPage"
+import { useState } from "react"
+import PropertyImageCarousel from "./PropertyImageCarousel"
+
 function PropertyCard({ property }) {
-    let mainPhoto = ""
+    let photos = []
     try {
-        const photos = JSON.parse(property.L_Photos)
-        if(Array.isArray(photos) && photos.length > 0) {
-            mainPhoto = photos[0]
-        }
+        photos = JSON.parse(property.L_Photos)
     } catch(err) {
-        mainPhoto = ""
+        console.log(err)
     }
 
     const location = `${property.L_City}, ${property.L_State}`
+    const navigate = useNavigate()
     return (
-        <div className="property-card">
-            {mainPhoto ? (<img className="photo" src={mainPhoto} alt={property.L_Address}/>) 
-            : <div className="photo">No photo</div>}
+        <div className="property-card" onClick={() => { 
+            navigate(`/property/${property.L_ListingID}`)}
+        }>
+            <PropertyImageCarousel images={photos} idx={0}/>
             <p className="propertyPrice">${Number(property.L_SystemPrice).toLocaleString()}</p>
             <div className="propertyLocation">
                 <p className="propertyLocation">{property.L_Address}</p>
                 <p className="propertyLocation">{location}</p>
             </div>
-            <div className="propertyDetails">
+            <div className="cardDetails">
                 <p>{property.L_Keyword2} beds</p>  
                 <p>{Number(property.LM_Dec_3)} baths</p>
                 <p>{property.LM_Int2_3} sqft</p>

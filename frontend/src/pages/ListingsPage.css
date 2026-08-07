@@ -4,7 +4,7 @@
 
 .property-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 24px;
   padding: 24px;
 }
@@ -22,18 +22,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.photo {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.propertyPrice {
-    text-align: center;
-    font-size: 18px;
-}
-
-.propertyLocation, .propertyDetails {
+.propertyLocation, .cardDetails {
     display: flex;
     justify-content: space-between;
     font-size: 18px;
@@ -49,8 +38,23 @@ input {
     font-size: 16px;
 }
 
+#cardPhoto {
+    width: 75%;
+    height: 250px;
+    margin: 0px auto;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
 .page {
   display: flex;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 90px;
 }
 
 .paginationHolder {
@@ -60,7 +64,7 @@ input {
   align-items: center;
 }
 
-.buttonHolder {
+.buttonHolder, .navigation {
   display: flex;
   flex-direction: row;
   align-items: center;

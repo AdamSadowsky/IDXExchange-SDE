@@ -62,7 +62,8 @@ app.get("/api/properties/:id/openhouses", async (req, res) => {
             L_DisplayId,
             OpenHouseDate,
             OH_StartTime,
-            OH_EndTime
+            OH_EndTime,
+            all_data
             FROM rets_openhouse
             WHERE L_ListingID = ?
             ORDER BY OpenHouseDate, OH_StartTime;`, [openhouse_id])
