@@ -12,9 +12,35 @@ router.get("/", async (req, res) => {
         const baths = req.query.baths ? Number(req.query.baths) : null
         const limit = req.query.limit ?  Number(req.query.limit) : 20
         const offset = req.query.offset ? Number(req.query.offset) : 0
+        let sortBy = req.query.sortBy ? req.query.sortBy.trim() : null
+        let sortOrder = req.query.sortOrder ? req.query.sortOrder.trim() : null
 
         const conditions = []
         const values = []
+        let sort = ""
+
+        if(sortBy !== null && sortOrder !== null) {
+            if(sortBy === "1") {
+                sortBy = "ORDER BY L_SystemPrice"
+            } else if(sortBy === "2") {
+                sortBy = "ORDER BY ListingContractDate"
+            } else if(sortBy === "3") {
+                sortBy = "ORDER BY LM_Int2_3"
+            } else if(sortBy === "4") {
+                sortBy = "ORDER BY L_Keyword2"
+            } else {
+                return res.status(400).json()
+            }
+
+            if(sortOrder === "1") {
+                sortOrder = "DESC"
+            } else if(sortOrder === "2") {
+                sortOrder = "ASC"
+            } else {
+                return res.status(400).json()
+            }
+            sort = `${sortBy} ${sortOrder}`
+        }
 
         if(city) {
             if(/\d/.test(city)) {
@@ -108,7 +134,7 @@ router.get("/", async (req, res) => {
             LM_Int2_3,
             L_Photos
             FROM rets_property
-            ${where} LIMIT ? OFFSET ?;`, [...values, limit, offset]
+            ${where} ${sort} LIMIT ? OFFSET ? ;`, [...values, limit, offset]
         )
         return res.json({
             total: total,

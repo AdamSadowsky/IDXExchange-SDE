@@ -24,8 +24,8 @@ function PropertyCard({ property }) {
                 <p className="propertyLocation">{location}</p>
             </div>
             <div className="cardDetails">
-                <p>{property.L_Keyword2} beds</p>  
-                <p>{Number(property.LM_Dec_3)} baths</p>
+                <p>{property.L_Keyword2} beds |</p>  
+                <p>{Number(property.LM_Dec_3)} baths |</p>
                 <p>{property.LM_Int2_3} sqft</p>
             </div>
         </div>

@@ -1,15 +1,7 @@
 
-.propertyDetails{
-    width: 75%;
-    margin: 75px auto;
+.propertyDetails {
+    width: 100%;
     background-color:ivory;
-    padding: 24px;
-}
-
-.propertyDetails, #cardPhoto, #centerPhoto {
-    display: block;
-    border: 2px solid black;
-    border-radius: 20px;
 }
 
 .photoGallery {
@@ -41,7 +33,7 @@
 
 .pageNumber {
     font-size: 20px;
-    margin: 25px 0}
+}
 
 .pageNumber, .location {
     display: flex;
@@ -65,7 +57,8 @@
 }
 
 .propertyDescription, .ohDescription {
-    margin: 50px 50px;
+    margin: 0px 50px;
+    padding: 10px;
 }
 
 .lightBox {
@@ -96,7 +89,6 @@
 .openhouse {
     display: flex;
     flex-direction: row;
-    margin: 50px auto;
     font-size: 20px;
     gap: 45px;
     justify-content: center;

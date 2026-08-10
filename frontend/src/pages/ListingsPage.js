@@ -13,6 +13,8 @@ function ListingsPage() {
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(true)
     const [filters, setFilters] = useState({})
+    const [sortBy, setSortBy] = useState("")
+    const [sortOrder, setSortOrder] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(0)
 
@@ -22,7 +24,7 @@ function ListingsPage() {
             try {
                 setLoading(true)
                 setError("")
-                const data = await fetchProperties({ ...filters, limit, offset})
+                const data = await fetchProperties({ ...filters, limit, offset, sortBy, sortOrder})
                 if(!ignore) {
                     setProperties(data.results)
                     setTotal(data.total)
@@ -43,12 +45,12 @@ function ListingsPage() {
         return () => {
             ignore = true
         }
-    }, [filters, limit, offset])
-
+    }, [filters, limit, offset, sortBy, sortOrder])
+    
     return (
         <main>
             <h1 className="header">Property Listings</h1>
-            <PropertyFilters onSearch={setFilters} setCurrentPage={setCurrentPage} setOffset={setOffset}/>
+            <PropertyFilters onSearch={setFilters} setCurrentPage={setCurrentPage} setOffset={setOffset} sortBy={sortBy} sortOrder={sortOrder} setSortBy={setSortBy} setSortOrder={setSortOrder}/>
             {loading ? 
                 <p>Loading...</p> 
             : error ? 

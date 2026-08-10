@@ -1,13 +1,13 @@
 import { useState } from "react"
 
-function PropertyFilters({ onSearch, setCurrentPage, setOffset }) {
+function PropertyFilters({ onSearch, setCurrentPage, setOffset, sortBy, sortOrder, setSortBy, setSortOrder}) {
     const emptyFilters = {
         city: "",
         zipcode: "",
         minPrice: "",
         maxPrice: "",
         beds: "",
-        baths: ""
+        baths: "",
     }
     const [filters, setFilters] = useState(emptyFilters)
 
@@ -19,7 +19,8 @@ function PropertyFilters({ onSearch, setCurrentPage, setOffset }) {
                 type="text" 
                 placeholder="City" 
                 value={filters.city}
-                onChange={(e) => setFilters({...filters, city: e.target.value})}
+                onChange={(e) => 
+                    setFilters({...filters, city: e.target.value})}
             />
 
             <input 
@@ -70,18 +71,41 @@ function PropertyFilters({ onSearch, setCurrentPage, setOffset }) {
                 <option>7</option>
                 <option>8</option>
             </select>
+
+            <select value={sortBy} onChange={(e) => { 
+                setSortBy(e.target.value)
+            }}>
+                <option value="">Sort by</option>
+                <option value={1}>Price</option>
+                <option value={2}>Date</option>
+                <option value={3}>SQFT</option>
+                <option value={4}>Beds</option>
+            </select>
+
+            <select value ={sortOrder} onChange={(e) => { 
+                setSortOrder(e.target.value)
+            }}>
+                <option value="">Order by</option>
+                <option value={1}>Decending</option>
+                <option value={2}>Ascending</option>
+            </select>
             
             <button className="search" onClick={() => { 
                 onSearch(filters) 
                 setCurrentPage(1)
                 setOffset(0)
+                setSortBy("")
+                setSortOrder("")
             }}>Search</button>
 
             <button className="clear" onClick={() => {
                 onSearch(emptyFilters)
                 setFilters(emptyFilters)
                 setCurrentPage(1)
-                setOffset(0)}}>Clear</button>
+                setOffset(0)
+                setSortBy("")
+                setSortOrder("")
+            }}>Clear</button>
         </div>
     )
 }

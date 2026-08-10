@@ -76,11 +76,11 @@ function PropertyDetailPage() {
 
     return (
         <>
-            <button className="back" onClick={() => {
-                navigate(-1)
-            }}>Back</button>
             {loading ? <p>Loading...</p> : 
-            <div className="propertyDetails">
+                <div className="propertyDetails">
+                    <button className="back" onClick={() => {
+                    navigate(-1)
+                }}>Back</button>
                 <PropertyImageGallery photos={photos}/>
                 <div className="location">
                     <div className="address">{property.L_Address}</div>
