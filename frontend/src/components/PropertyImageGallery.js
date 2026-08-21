@@ -7,12 +7,12 @@ function PropertyImageGallery({ photos }) {
 
     return (
         <div className="photoGallery">
-            <img id="centerPhoto" src={mainPhoto} alt="Missing Photo" onClick={() => {
+            <img id="centerPhoto" src={mainPhoto} alt="Missing" onClick={() => {
                 setLightBox(true)
             }}></img>
             <div className="thumbnailStrip">
                 {photos.map((photo, index) => {
-                    return (<img src={photo} alt="Missing photo" key={index} className="thumbnail" onClick={() => {
+                    return (<img src={photo} alt="Missing" key={index} className="thumbnail" onClick={() => {
                             setMainPhoto(photo)
                         }}></img>)
                 })}

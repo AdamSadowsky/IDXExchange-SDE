@@ -4,7 +4,6 @@ function PropertyImageCarousel({ images, idx }) {
     const [imgIdx, setImgIdx] = useState(idx)
     const imgCount = images.length
     const photo = images[imgIdx]
-    console.log(photo)
 
     if(imgCount === 0) {
         return <p>No images available</p>
@@ -12,7 +11,7 @@ function PropertyImageCarousel({ images, idx }) {
 
     return (
         <div className="imageCarousel">
-            <img id="cardPhoto" src={photo} alt="Missing image"/>
+            <img id="cardPhoto" src={photo} alt="Missing"/>
             <div className="navigation">
                 <button className="prev" disabled={imgIdx <= 0} onClick={(event) => {
                     event.stopPropagation()
