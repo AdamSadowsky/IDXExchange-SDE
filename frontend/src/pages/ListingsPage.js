@@ -29,7 +29,6 @@ function ListingsPage() {
                     setProperties(data.results)
                     setTotal(data.total)
                     setItemsPerPage(data.results.length)
-                    console.log(data)
                 }
             } catch(err) {
                 if(!ignore) {
