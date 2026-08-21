@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom"
-import PropertyDetailPage from "../pages/PropertyDetailPage"
-import { useState } from "react"
 import PropertyImageCarousel from "./PropertyImageCarousel"
+import PropTypes from 'prop-types'
 
 function PropertyCard({ property }) {
     let photos = []
@@ -30,6 +29,10 @@ function PropertyCard({ property }) {
             </div>
         </div>
     )
+}
+
+PropertyCard.propTypes = {
+    property: PropTypes.object.isRequired
 }
 
 export default PropertyCard
