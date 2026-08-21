@@ -144,7 +144,7 @@ router.get("/", async (req, res) => {
         })
 
     } catch(err) {
-        console.log(err.message)
+        console.error(err.message)
         return res.status(500).json({
             status: 500,
             database: "Not Connected",
@@ -156,7 +156,7 @@ router.get("/", async (req, res) => {
 function errorHelper(res, name) {
     const type = name != "city" && name != 'minPrice' && name != 'maxPrice' 
     ? "letters or decimals" : name != 'city'? "letters" : "numbers"
-    console.log(`${name} cannot contain ${type}`)
+    console.error(`${name} cannot contain ${type}`)
     return res.status(400).json({
         error: `${name} cannot contain ${type}`
     })

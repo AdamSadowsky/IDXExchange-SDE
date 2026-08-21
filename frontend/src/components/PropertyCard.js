@@ -7,7 +7,7 @@ function PropertyCard({ property }) {
     try {
         photos = JSON.parse(property.L_Photos)
     } catch(err) {
-        console.log(err)
+        photos = []
     }
 
     const location = `${property.L_City}, ${property.L_State}`

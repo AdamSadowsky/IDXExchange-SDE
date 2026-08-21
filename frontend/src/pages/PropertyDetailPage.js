@@ -26,10 +26,9 @@ function PropertyDetailPage() {
                 }
 
                 const openhouseData = await res.json()
-                console.log(openhouseData)
                 setOpenHouses(openhouseData.result)
             } catch(err) {
-                console.log(err)
+                console.error(err)
             } finally {
                 setLoading(false)
             }

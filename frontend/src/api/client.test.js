@@ -1,4 +1,4 @@
-import { fetchProperties, fetchPropertyDetail } from "./client";
+import { fetchProperties } from "./client";
 
 global.fetch = jest.fn()
 
