@@ -119,6 +119,10 @@ app.get("/api/properties/:id", async (req, res) => {
 
 app.use("/api/properties", require("./routes/properties"))
 
-app.listen(port, () => {
-    console.log(`server is running on ${port}`)
-})
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`server is running on ${port}`)
+    })
+}
+
+module.exports = app
