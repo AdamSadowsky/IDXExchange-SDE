@@ -1,139 +1,90 @@
 # IDX Exchange Property Search
 
-A full-stack real estate property search application built with React, Node.js, Express, and MySQL. The application allows users to browse property listings, apply filters, sort results, paginate through listings, and view detailed property information including images, maps, and scheduled open houses.
+A full-stack real estate property search application built with React, Node.js, Express, and MySQL. Users can filter and sort property listings, paginate through results, view property details and photos, see property locations on a map, and view scheduled open houses.
+
+<img width="948" height="471" alt="Screenshot 2026-08-27 223958" src="https://github.com/user-attachments/assets/2a6d621a-765d-4da5-ae6a-0dc483cfb72c" />
+
 
 ## Tech Stack
 
 ### Frontend
-- React
-- React Router
+- React 19.2.7
+- React Router DOM 7.18.2
+- React Testing Library 16.3.2
 - JavaScript
 - CSS
-- Jest
-- React Testing Library
 
 ### Backend
 - Node.js
-- Express
-- MySQL
-- mysql2
-- Jest
-- Supertest
-
-## Features
-
-- Browse property listings
-- Filter listings by:
-  - City
-  - Zip code
-  - Minimum price
-  - Maximum price
-  - Bedrooms
-  - Bathrooms
-- Sort listings by:
-  - Price
-  - Listing date
-  - Square footage
-  - Bedrooms
-- Paginate through search results
-- View individual property details
-- View property images
-- View property location on a map
-- View scheduled open houses
-- Backend input validation
-- Request logging
-- Frontend and backend automated tests
-
-## Project Structure
-
-```text
-IDX-Exchange-Project/
-│
-├── backend/
-│   ├── routes/
-│   │   └── properties.js
-│   ├── db.js
-│   ├── server.js
-│   ├── properties.test.js
-│   ├── package.json
-│   └── .env
-│
-├── frontend/
-│   ├── src/
-│   │   ├── api/
-│   │   ├── components/
-│   │   ├── hooks/
-│   │   ├── pages/
-│   │   ├── utils/
-│   │   └── App.js
-│   └── package.json
-│
-└── README.md
-```
+- Express 5.2.1
+- MySQL 8
+- mysql2 3.22.5
+- Jest 30.4.2
+- Supertest 7.2.2
+- Nodemon 3.1.14
 
 ## Architecture
-
-The application uses a client-server architecture.
-
-The React frontend handles the user interface, filtering, sorting, pagination, property cards, and property detail pages.
-
-The Express backend exposes REST API endpoints that validate requests and query the MySQL property database.
 
 ```text
 React Frontend
       |
       | HTTP requests
       v
-Express / Node.js API
+Node.js / Express API
       |
       | SQL queries
       v
 MySQL Database
 ```
 
-The frontend communicates with the backend through `/api` endpoints. The backend uses a MySQL connection pool provided by `mysql2/promise`.
+The React frontend handles filtering, sorting, pagination, property cards, property details, images, and maps.
 
-## Setup
+The Express backend validates requests and queries the MySQL database using a connection pool.
+
+## Local Setup
 
 ### Prerequisites
 
-Install the following before running the project:
+Install:
 
-- Node.js
-- npm
-- MySQL
+- Node.js and npm
+- MySQL 8
 - Git
 
-The application also requires access to the IDX Exchange property database.
-
-### Clone the Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/AdamSadowsky/IDXExchange-SDE.git
 cd IDXExchange-SDE
 ```
 
-### Backend Setup
+### 2. Database
 
-Navigate to the backend directory:
+The application was developed using a private IDX/RETS property dataset. The dataset is **not included in this repository**.
+
+The backend requires a MySQL database containing:
+
+```text
+rets_property
+rets_openhouse
+```
+
+Without access to a compatible IDX/RETS database, the full application cannot display property listings. The automated tests can still be run because the backend database connection is mocked during testing.
+
+### 3. Backend Setup
 
 ```bash
 cd backend
-```
-
-Install dependencies:
-
-```bash
 npm install
 ```
 
-Create a `.env` file inside the `backend` directory:
+Create `backend/.env`:
 
 ```env
-DB_HOST=your_database_host
-DB_USER=your_database_user
-DB_PASSWORD=your_database_password
-DB_NAME=your_database_name
+DB_HOST=localhost
+DB_USER=your_mysql_user
+DB_PASSWORD=your_mysql_password
+DB_NAME=rets
 DB_PORT=3306
 ```
 
@@ -143,49 +94,41 @@ Start the backend:
 npm start
 ```
 
-For development with Nodemon:
-
-```bash
-npm run dev
-```
-
-The backend runs on:
+The backend runs at:
 
 ```text
 http://localhost:5000
 ```
 
-### Frontend Setup
+### 4. Frontend Setup
 
-Open another terminal and navigate to the frontend directory:
+Open another terminal:
 
 ```bash
 cd frontend
-```
-
-Install dependencies:
-
-```bash
 npm install
-```
-
-Start the React application:
-
-```bash
 npm start
 ```
 
-The frontend will open in the browser and communicate with the backend API.
+The frontend runs at:
 
-## API Documentation
+```text
+http://localhost:3000
+```
+
+For Google Maps, create `frontend/.env`:
+
+```env
+REACT_APP_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+```
+
+## API Reference
 
 ### Health Check
 
 ```http
 GET /api/health
 ```
-
-Checks whether the backend can connect to the MySQL database.
 
 Example response:
 
@@ -196,69 +139,49 @@ Example response:
 }
 ```
 
----
-
 ### Get Properties
 
 ```http
 GET /api/properties
 ```
 
-Returns a paginated list of properties.
+Supported query parameters:
 
-### Query Parameters
+| Parameter | Description |
+| --- | --- |
+| `city` | City |
+| `zipcode` | ZIP code |
+| `minPrice` | Minimum price |
+| `maxPrice` | Maximum price |
+| `beds` | Bedrooms |
+| `baths` | Bathrooms |
+| `limit` | Results per page |
+| `offset` | Results to skip |
+| `sortBy` | Sort field |
+| `sortOrder` | Sort direction |
 
-| Parameter | Description | Example |
-|---|---|---|
-| `city` | Filter by city | `Oroville` |
-| `zipcode` | Filter by zip code | `95966` |
-| `minPrice` | Minimum property price | `300000` |
-| `maxPrice` | Maximum property price | `800000` |
-| `beds` | Number of bedrooms | `3` |
-| `baths` | Number of bathrooms | `2` |
-| `limit` | Number of results returned | `20` |
-| `offset` | Number of results skipped | `0` |
-| `sortBy` | Field used for sorting | `1` |
-| `sortOrder` | Sort direction | `1` |
+Example request:
 
-### Sorting Values
-
-`sortBy`:
-
-| Value | Sort Field |
-|---|---|
-| `1` | Price |
-| `2` | Listing date |
-| `3` | Square footage |
-| `4` | Bedrooms |
-
-`sortOrder`:
-
-| Value | Direction |
-|---|---|
-| `1` | Descending |
-| `2` | Ascending |
-
-Example:
-
-```http
-GET /api/properties?city=Oroville&minPrice=300000&maxPrice=800000&beds=3&limit=20&offset=0
+```text
+GET /api/properties?city=Oroville&minPrice=300000&maxPrice=800000&beds=3
 ```
 
 Example response:
 
 ```json
 {
-  "total": 50,
+  "total": 1,
   "limit": 20,
   "offset": 0,
-  "results": []
+  "results": [
+    {
+      "L_ListingID": "1234567890",
+      "L_City": "Oroville",
+      "L_SystemPrice": 500000
+    }
+  ]
 }
 ```
-
-Invalid filter values return HTTP `400`.
-
----
 
 ### Get Property Details
 
@@ -266,22 +189,13 @@ Invalid filter values return HTTP `400`.
 GET /api/properties/:id
 ```
 
-Returns the property associated with the specified listing ID.
+The property ID must contain exactly 10 digits.
 
-The listing ID must contain exactly 10 digits.
+Example request:
 
-Example:
-
-```http
+```text
 GET /api/properties/1234567890
 ```
-
-Possible responses:
-
-- `200` - Property found
-- `400` - Invalid listing ID
-- `404` - Property not found
-- `500` - Server or database error
 
 Example response:
 
@@ -290,28 +204,43 @@ Example response:
   "status": "ok",
   "database": "connected",
   "result": {
-    "L_ListingID": "1234567890"
+    "L_ListingID": "1234567890",
+    "L_Address": "123 Main St",
+    "L_City": "Oroville"
   }
 }
 ```
 
----
-
-### Get Property Open Houses
+### Get Open Houses
 
 ```http
 GET /api/properties/:id/openhouses
 ```
 
-Returns scheduled open houses for a property.
+Example request:
 
-Example:
-
-```http
+```text
 GET /api/properties/1234567890/openhouses
 ```
 
-If the property exists but has no scheduled open houses, the API returns:
+Example response:
+
+```json
+{
+  "status": "ok",
+  "database": "connected",
+  "result": [
+    {
+      "L_ListingID": "1234567890",
+      "OpenHouseDate": "2026-08-30",
+      "OH_StartTime": "10:00:00",
+      "OH_EndTime": "12:00:00"
+    }
+  ]
+}
+```
+
+A property with no scheduled open houses returns:
 
 ```json
 {
@@ -321,71 +250,93 @@ If the property exists but has no scheduled open houses, the API returns:
 }
 ```
 
-Possible responses:
+## Database Schema
 
-- `200` - Property exists
-- `400` - Invalid listing ID
-- `404` - Property does not exist
-- `500` - Server or database error
+### `rets_property`
+
+Stores property listings.
+
+Important fields include:
+
+- `L_ListingID`
+- `L_Address`
+- `L_City`
+- `L_State`
+- `L_Zip`
+- `L_SystemPrice`
+- `L_Keyword2` — bedrooms
+- `LM_Dec_3` — bathrooms
+- `LM_Int2_3` — square footage
+- `L_Photos`
+- `LMD_MP_Latitude`
+- `LMD_MP_Longitude`
+
+### `rets_openhouse`
+
+Stores open-house information.
+
+Important fields include:
+
+- `L_ListingID`
+- `OpenHouseDate`
+- `OH_StartTime`
+- `OH_EndTime`
+
+The tables are related through `L_ListingID`.
+
+```text
+rets_property.L_ListingID
+          |
+          v
+rets_openhouse.L_ListingID
+```
+
+One property can have zero or more open-house records.
 
 ## Testing
 
-The project includes automated frontend and backend tests.
-
-### Backend Tests
-
-From the `backend` directory:
+### Backend
 
 ```bash
+cd backend
 npm test
 ```
 
-Run tests with coverage:
+Coverage:
 
 ```bash
 npm test -- --coverage
 ```
 
-Backend tests use Jest and Supertest. The database connection is mocked so tests can exercise the Express route handlers without querying the real MySQL database.
-
-Tests cover:
-
-- Property listing requests
-- Filtering
-- Pagination
-- Invalid query parameters
-- Property detail responses
-- Invalid and unknown listing IDs
-- Open house results
-- Properties with no open houses
-- Unknown properties
-
-### Frontend Tests
-
-From the `frontend` directory:
+### Frontend
 
 ```bash
+cd frontend
 npm test -- --watchAll=false
 ```
 
-Run frontend tests with coverage:
+Coverage:
 
 ```bash
 npm test -- --coverage --watchAll=false
 ```
 
-Tests cover critical components including:
-
-- `PropertyFilters`
-- `Pagination`
-- `PropertyCard`
-
-Critical frontend and backend files maintain at least 70% line coverage.
+Critical frontend and backend files meet the required 70%+ test coverage target.
 
 ## Known Issues and Limitations
 
-- The application requires access to the IDX Exchange MySQL property database.
-- Property information is limited to the data available in the source database.
-- Some properties may not contain images, map coordinates, or open house information.
-- The application currently does not include user authentication or saved property functionality.
-- The project is currently intended for development use and is not configured as a production deployment.
+- The private IDX/RETS dataset is not included in this repository.
+- A compatible database is required to run the full application with property listings.
+- Some listings may have missing property information, photos, or map coordinates.
+- Property photo URLs may expire.
+- A Google Maps API key is required to display property maps.
+- The application is currently intended for local development.
+
+## Future Improvements
+
+- Provide a sanitized sample dataset for public use.
+- Add user authentication.
+- Add saved or favorite properties.
+- Improve responsive/mobile styling.
+- Add production deployment configuration.
+- Expand automated test coverage.
