@@ -86,7 +86,7 @@ function PropertyFilters({ onSearch, setCurrentPage, setOffset, sortBy, sortOrde
                 setSortOrder(e.target.value)
             }}>
                 <option value="">Order by</option>
-                <option value={1}>Decending</option>
+                <option value={1}>Descending</option>
                 <option value={2}>Ascending</option>
             </select>
             
