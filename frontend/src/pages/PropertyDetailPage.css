@@ -1,7 +1,8 @@
 
 .propertyDetails {
     width: 100%;
-    background-color:ivory;
+    padding: 24px;
+    background-color: #faf9f6;
 }
 
 .photoGallery {
@@ -9,19 +10,24 @@
     flex-direction: column;
     margin: 25px auto;
     align-items: center;
-    width: 75%;
+    width: min(100%, 960px);
 }
 
 #centerPhoto {
     height: 400px;
-    width: 75%;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+    background-color: #eeeae2;
+    cursor: zoom-in;
 }
 
 .thumbnailStrip {
     display: flex;
-    margin: 25px 0px;
+    margin: 16px 0;
+    padding-bottom: 8px;
     gap: 8px;
-    width: 75%;
+    width: 100%;
     overflow-x: auto;
 }
 
@@ -29,10 +35,15 @@
     width: 75px;
     height: 75px;
     object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid #ddd8d0;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
-.pageNumber {
-    font-size: 20px;
+.thumbnail:hover {
+    outline: 2px solid #865d30;
+    outline-offset: -2px;
 }
 
 .pageNumber, .location {
@@ -43,7 +54,10 @@
 .location {
     display: flex;
     margin: 15px auto;
-    gap: 30px;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    text-align: center;
+    overflow-wrap: anywhere;
     font-weight: bold;
     font-size: 24px;
 }
@@ -51,14 +65,42 @@
 .homeDetails {
     display: flex;
     flex-direction: row;
-    gap: 60px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 32px;
     justify-content: center;
-    font-size: 20px;
+    font-size: 18px;
+    padding: 16px 0;
+    border-block: 1px solid #e4ded4;
+}
+
+.homeDetails .propertyPrice {
+    margin: 0;
 }
 
 .propertyDescription, .ohDescription {
-    margin: 0px 50px;
-    padding: 10px;
+    max-width: 960px;
+    margin: 24px auto;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.propertyMap {
+    max-width: 960px;
+    margin: 24px auto;
+}
+
+.propertyMap iframe {
+    display: block;
+    border: 1px solid #ddd8d0;
+    border-radius: 12px;
+}
+
+.propertyMap a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #76512d;
+    text-underline-offset: 3px;
 }
 
 .lightBox {
@@ -70,39 +112,49 @@
     width: 100%;
     height: 100%;
     background-color: black;
+    z-index: 10;
+    padding: 72px 16px 16px;
 }
 
 .exit {
     position: absolute;
-    top: 5%;
-    right: 5%;
+    top: 16px;
+    right: 16px;
     font-size: 28px;
     color: white;
     background-color: black;
-    border: none;
+    border: 1px solid transparent;
 }
 
-.exit:hover {
-    border: 1px solid white;
+.exit:hover:not(:disabled) {
+    background-color: #302b25;
+    border-color: white;
 }
 
 .openhouse {
     display: flex;
     flex-direction: row;
-    font-size: 20px;
-    gap: 45px;
+    flex-wrap: wrap;
+    font-size: 18px;
+    gap: 8px 32px;
     justify-content: center;
+    margin: 16px auto;
 }
 
-p {
+.propertyDetails > p {
     text-align: center;
-    font-weight: bold;
+    color: #625c54;
+}
+
+.lightBox .imageCarousel {
+    width: min(100%, 1000px);
 }
 
 .lightBox #cardPhoto {
-    margin: 50px;
-    width: 800px;
-    height: 400px;
+    margin: 0 auto;
+    width: 100%;
+    height: max(80px, calc(100dvh - 180px));
+    object-fit: contain;
 }
 
 .lightBox .pageNumber {
@@ -110,6 +162,24 @@ p {
 }
 
 .back {
-    background-color: bisque;
-    font-size: 24px;
+    font-size: 16px;
+}
+
+@media (max-width: 600px) {
+    .propertyDetails {
+        padding: 16px;
+    }
+
+    #centerPhoto {
+        height: 260px;
+    }
+
+    .location {
+        font-size: 20px;
+    }
+
+    .homeDetails {
+        gap: 12px 20px;
+        font-size: 16px;
+    }
 }

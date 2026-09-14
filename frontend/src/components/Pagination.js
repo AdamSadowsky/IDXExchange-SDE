@@ -41,7 +41,7 @@ function Pagination({ page, items, total, limit, setCurrentPage, setOffset}) {
                             ) 
                         }
                         return (
-                            <button className="pageBttn" key={pageNumber} onClick={() => {
+                            <button className="pageBttn" key={pageNumber} aria-current={pageNumber === page ? "page" : undefined} onClick={() => {
                                 setCurrentPage(pageNumber)
                                 setOffset((pageNumber * limit) - limit)
                                 window.scrollTo(0, 0)
